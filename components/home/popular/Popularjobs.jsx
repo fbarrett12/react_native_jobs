@@ -18,6 +18,13 @@ const Popularjobs = () => {
     }
   )
 
+  const [selectedJob, setSelectedJob] = useState();
+
+  const handleCardPress = (item) => {
+    router.push(`/job-details/${item.job_id}`);
+    setSelectedJob(item.job_id);
+  };
+
   return (
     <View style={styles.container}>
       <View style={styles.header}>
@@ -36,10 +43,12 @@ const Popularjobs = () => {
           <Text>Something is wrong</Text>
         ) : (
           <FlatList 
-            data={[1,2,3,4,5,6,7,8,9]}
+            data={data}
             renderItem={({ item }) => (
               <PopularJobCard
                 item={item}
+                selectedJob={selectedJob}
+                handleCardPress={handleCardPress}
               />
             )}
             keyExtractor={item => item?.job_id}
